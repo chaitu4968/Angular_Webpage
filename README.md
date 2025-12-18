@@ -1,59 +1,55 @@
-# ImageSearchEngine
+Angular Image Search Engine
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+A simple image search application built with Angular (v17+) that fetches images from the Unsplash API and displays them in a responsive grid layout.
 
-## Development server
+Getting Started
+Prerequisites
 
-To start a local development server, run:
+Node.js
 
-```bash
+Angular CLI
+
+Installation
+git clone https://github.com/chaitu4968/Angular_Webpage.git
+cd Angular_Webpage
+npm install
+
+Run Locally
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+Open http://localhost:4200 in your browser.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Architecture
 
-```bash
-ng generate component component-name
-```
+Built using Angular Standalone Components
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Component-based UI design
 
-```bash
-ng generate --help
-```
+Dedicated service layer for Unsplash API integration
 
-## Building
+Clean separation between UI and API logic
 
-To build the project run:
+Challenges
 
-```bash
-ng build
-```
+Handling empty search results and API errors
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Managing pagination and application state
 
-## Running unit tests
+Solution: Implemented proper error handling and maintained pagination state to ensure a smooth user experience.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Features
 
-```bash
-ng test
-```
+Keyword-based image search
 
-## Running end-to-end tests
+Responsive image grid
 
-For end-to-end (e2e) testing, run:
+Load More / pagination
 
-```bash
-ng e2e
-```
+Basic error handling
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Configuration
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project uses the Unsplash API.
+Add your access key in the environment configuration file.
+Do not commit API keys to public repositories.
