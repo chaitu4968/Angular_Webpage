@@ -1,9 +1,130 @@
-<form (submit)="onSearch($event)">
-  <input
-    type="text"
-    placeholder="Search images..."
-    (input)="onInputChange($event)"
-    [value]="searchText"
-  />
-  <button type="submit">Search</button>
-</form>
+<div class="page-background">
+
+  <!-- SEARCH BAR -->
+  <form
+    class="d-flex justify-content-center align-items-center gap-2 my-4 pt-5"
+    (ngSubmit)="handleSearch()"
+  >
+    <input
+      type="text"
+      class="form-control form-control-lg w-50"
+      placeholder="Search images..."
+      [(ngModel)]="currentQuery"
+      name="search"
+      required
+    />
+
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      [disabled]="loading"
+    >
+      <i class="bi bi-search"></i>
+    </button>
+  </form>
+
+  <!-- ERROR -->
+  <div class="text-center text-danger mb-3" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- LOADING (INITIAL) -->
+  <div class="text-center my-4" *ngIf="loading">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <!-- IMAGE GRID -->
+  <div class="container pb-4">
+    <div class="row g-4">
+      <div
+        class="col-sm-6 col-md-4 col-lg-3"
+        *ngFor="let img of images"
+      >
+        <div class="card image-card shadow-sm">
+          <img
+            [src]="img.urls.small"
+            class="card-img-top"
+            [alt]="img.alt_description || 'Unsplash image'"
+          />
+          <div class="card-body text-center">
+            <small class="text-muted">
+              {{ img.user?.name }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- IMAGE MODAL -->
+<div
+  class="modal fade show d-block"
+  *ngIf="selectedImage"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ selectedImage.user?.name }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+        ></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <img
+          [src]="selectedImage.urls.regular"
+          class="img-fluid rounded"
+        />
+      </div>
+
+      <div class="modal-footer">
+        <button
+          class="btn btn-success"
+          (click)="downloadImage()"
+        >
+          Download
+        </button>
+
+        <button
+          class="btn btn-outline-primary"
+          (click)="saveImage()"
+        >
+          Save
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          (click)="closeModal()"
+        >
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div class="modal-backdrop fade show"></div>
+</div>
+
+
+    <!-- LOAD MORE -->
+    <div class="text-center my-4" *ngIf="images.length && !loading">
+      <button
+        class="btn btn-outline-light btn-lg px-5"
+        (click)="loadMore()"
+        [disabled]="loadingMore"
+      >
+        <span *ngIf="!loadingMore">Load More</span>
+        <span *ngIf="loadingMore">
+          <span class="spinner-border spinner-border-sm"></span>
+          Loading...
+        </span>
+      </button>
+    </div>
+  </div>
+
+</div>
