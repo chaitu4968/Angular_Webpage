@@ -1,0 +1,9 @@
+<form (submit)="onSearch($event)">
+  <input
+    type="text"
+    placeholder="Search images..."
+    (input)="onInputChange($event)"
+    [value]="searchText"
+  />
+  <button type="submit">Search</button>
+</form>
